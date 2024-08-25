@@ -8,6 +8,18 @@ const authorInput = bookDialog.querySelector('#author')
 const pagesInput = bookDialog.querySelector('#pages')
 const readInput = bookDialog.querySelector('#read')
 
+class Book {
+    constructor(title, author, pages, read) {
+        this.title = title
+        this.author = author
+        this.pages = pages
+        this.read = read
+    }
+    #info() {
+        return `The ${this.title} by ${this.author}, ${this.pages} ,${this.read}`
+    }
+}
+
 let book1 = new Book('Harry Potter and the Goblet of Fire','J.K Rowling','734','yes')
 let book2 = new Book('The Lord of the Rings','J.R.R Tolkien','1216','no')
 let book3 = new Book('Marienbad My Love','Mark Leach','10,710','yes')
@@ -17,20 +29,11 @@ let book6 = new Book('The Stand','Stephen King','1152','yes')
 let book7 = new Book('The Goldfinch','Donna Tartt','771','yes')
 let book8 = new Book('Vanity Fair','William Makepeace Thackeray','816 ','no')
 let book9 = new Book('A Suitable Boy','A Suitable Boy','1349','no')
-const myBook = [
-  book1,book2,book3,book4,book5,book6,book7,book8,book9
-  
-]
 
-function Book(title,author,pages,read){
-    this.title = title
-    this.author = author
-    this.pages = pages
-    this.read = read
-    this.info = function(){
-        return `The ${this.title} by ${this.author}, ${this.pages} ,${this.read}`
-    }
-}
+const myBook = [
+    book1,book2,book3,book4,book5,book6,book7,book8,book9
+    
+  ]
 function clearInput(){
     titleInput.value = ''
     authorInput.value = ''
@@ -38,22 +41,19 @@ function clearInput(){
     readInput.value = ''
 }
 
-
 function addToLibrary(){
     let bookTitle = titleInput.value
     let bookAuthor = authorInput.value
     let bookPages = pagesInput.value
     let bookRead = readInput.value
-   
 
-    if(!bookTitle == '' && !bookAuthor == '' && !bookPages == '' && !bookRead == ''){
+    if(bookTitle !== '' && bookAuthor !== '' && bookPages !== '' && bookRead !== ''){
         if( bookPages !== '0' && !bookPages.includes('-')){
             container.textContent = ''
             let newBooks = new Book(bookTitle,authorInput.value,pagesInput.value,bookRead)
             myBook.push(newBooks)
             displayBook(myBook)
             clearInput()
-
         }
         else{
             alert('Start No.of pages from 1')
