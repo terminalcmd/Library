@@ -7,6 +7,76 @@ const titleInput = bookDialog.querySelector('#title')
 const authorInput = bookDialog.querySelector('#author')
 const pagesInput = bookDialog.querySelector('#pages')
 const readInput = bookDialog.querySelector('#read')
+const form = document.querySelector('form')
+const titleErr = document.querySelector('.titleErr')
+const authErr = document.querySelector('.authErr')
+const pageErr = document.querySelector('.pageErr')
+const readErr = document.querySelector('.readErr')
+
+form.addEventListener('submit',(e) => {
+    e.preventDefault()
+    if(!titleInput.validity.valid){
+        showInputErr()
+    }else if(!authorInput.validity.valid){
+        showAuthorErr()
+    }else if(!pagesInput.validity.valid){
+        showPageErr()
+    }
+    else{
+        if(readInput.value == 'yes' || readInput.value === 'no' ){
+            addToLibrary()
+            readErr.textContent = ''
+        }else{
+            readErr.textContent = 'It should be yes or no.'
+        }
+    }
+})
+
+titleInput.addEventListener('input',() => {
+    if(!titleInput.validity.valid){
+        showTitleErr()
+    }else{
+        titleErr.textContent = ''
+    }
+})
+
+authorInput.addEventListener('input',() => {
+    if(!authorInput.validity.valid){
+        showAuthorErr()
+    }else{
+        authErr.textContent = ''
+    }
+})
+
+pagesInput.addEventListener('input',() => {
+    if(!pagesInput.validity.valid){
+        showPageErr()
+    }else{
+        pageErr.textContent = ''
+    }
+})
+
+function showTitleErr() {
+    if(titleInput.validity.typeMismatch){
+        titleErr.textContent = 'It must be a valid title.'
+    }else if(titleInput.validity.tooShort){
+        titleErr.textContent = 'Too short value it must greater than 2 characters.'
+    }
+}
+function showAuthorErr() {
+    if(authorInput.validity.typeMismatch){
+        authErr.textContent = 'It must be a valid author.'
+    }else if(authorInput.validity.tooShort){
+        authErr.textContent = 'Too short value it must greater than 2 characters.'
+    }
+}
+function showPageErr(){
+    if(pagesInput.validity.typeMismatch){
+        pageErr.textContent = 'It must be a valid.'
+    }else if(pagesInput.validity.rangeOverflow){
+        pageErr.textContent = 'Too high value it must lower than 10000.'
+    }
+}
 
 class Book {
     constructor(title, author, pages, read) {
@@ -46,25 +116,11 @@ function addToLibrary(){
     let bookAuthor = authorInput.value
     let bookPages = pagesInput.value
     let bookRead = readInput.value
-
-    if(bookTitle !== '' && bookAuthor !== '' && bookPages !== '' && bookRead !== ''){
-        if( bookPages !== '0' && !bookPages.includes('-')){
-            container.textContent = ''
-            let newBooks = new Book(bookTitle,authorInput.value,pagesInput.value,bookRead)
-            myBook.push(newBooks)
-            displayBook(myBook)
-            clearInput()
-        }
-        else{
-            alert('Start No.of pages from 1')
-            clearInput()
-        }
-    }
-    else{
-        alert('Fill the form to add a book ')
-        clearInput()
-        
-    }
+    container.textContent = ''
+    let newBooks = new Book(bookTitle,bookAuthor,bookPages,bookRead)
+    myBook.push(newBooks)
+    displayBook(myBook)
+    clearInput()  
 }
 
 function displayBook(book){
@@ -127,8 +183,5 @@ closeDialog.addEventListener('click',()=>{
     bookDialog.close()
     clearInput()
 })
-submitForm.addEventListener('click', (e)=>{
-    e.preventDefault()
-    bookDialog.close(addToLibrary())
-})
+
 

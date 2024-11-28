@@ -21,26 +21,31 @@
                 <div class="form-heading">
                     <p>Fill the form to add new book</p>
                 </div>
-                <form action="" method="dialog">
+                <form action="" >
                     <ul class="inputs-list">
                         <li>
-                            <label for="title">Titile:
-                                <input type="text" name="title-name" id="title" required>
+                            <label for="title">Title:
+                                <input type="text" minlength="2" name="title-name" id="title" required>
+                                <span class="titleErr"></span>
                             </label>
                         </li>
+                        
                         <li>
                             <label for="author">Author:
-                                <input type="text" name="author" id="author" required>
+                                <input type="text" minlength="2" name="author" id="author" required>
+                                <span class="authErr"></span>
                             </label>
                         </li>
                         <li>
                             <label for="pages">Pages:
-                                <input type="number" name="pages" id="pages" required>
+                                <input type="number" max="10000" name="pages" id="pages" required>
+                                <span class="pageErr"></span>
                             </label>
                         </li>
                         <li>
                             <label for="read">Read:
-                                <input placeholder="yes or no" type="text" name="read-status" id="read" required>
+                                <input placeholder="yes or no"  type="text" name="read-status" id="read" required>
+                                <span class="readErr"></span>
                             </label>
                         </li>
                     </ul>

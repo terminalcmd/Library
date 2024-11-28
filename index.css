@@ -55,6 +55,8 @@ a{
     font-weight: 600;
     box-shadow:2px 2px 5px white;
     margin-bottom:0px;
+    overflow: scroll;
+    overflow-x: hidden;
     
 }
 .display-card:hover{
@@ -153,6 +155,7 @@ form{
     margin-top:10px;
 }
 
+
 .inputs-list label{
     font-size:1.2rem;
     
@@ -181,3 +184,11 @@ form{
 .img-rights p{
     font-size:1.1rem;
 }
+span{
+    font-size: 0.9rem;
+    color: red;
+    max-width: 300px;
+    display: block;
+}
+
+    
